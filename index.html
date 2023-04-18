@@ -24,7 +24,7 @@
 
         .photo-bg {
             /* 卡片左侧图片 */
-            background-image: url("http://wa.bizihu.com/api-18.php");
+            background-image: url("./api-18.php?4563654");
         }
         
         
@@ -42,13 +42,13 @@
                 animation: bg 10s infinite;
             }
             #bg1 {
-                background-image: url('http://wa.bizihu.com/api-18.php');
+                background-image: url('./api-18.php?3464567435436547657');
             }
             #bg2 {
                 animation-delay: 5s;            /* bg2延迟5秒开始。同时bg2一开始无图片，使bg1淡入时背景为白色而不是另一张图片 */
             }
             @keyframes bg{
-                0%{transform: scale(1.5, 1.5);opacity: 0;}
+                0%{transform: scale(1.1, 1.1);opacity: 0;}
                 20%{opacity: 1;}                /* 0~2s 载入 */
                 30%{transform: scale(1, 1);}            /* 0~3s图片缩放 */
                 50%{opacity: 1;}                /* 5~7s 淡出 */
@@ -149,10 +149,10 @@
             countTime += 1;
             if(countTime % 10 == 7){
                 countImg += 1;
-                bg1Container.style = `background-image: url(http://wa.bizihu.com/api-18.php)`;
+                bg1Container.style = `background-image: url(http://wa.bizihu.com/api-18.php?5476345435254)`;
             }else if((countTime + 5) % 10 == 7){    // 第2张图片默认无图片，比第一张延迟5s开始动画，+5保证了在第2秒开始加载图片
                 countImg += 1;
-                bg2Container.style = `background-image: url(http://wa.bizihu.com/api-18.php)`;
+                bg2Container.style = `background-image: url(http://wa.bizihu.com/api-18.php?764432424235)`;
             }
         }, 1000);
     </script>
