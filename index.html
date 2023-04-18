@@ -29,6 +29,36 @@
             /* 卡片左侧图片 */
             background-image: url("https://bu.dusays.com/2022/06/04/629b0a2750921.jpg");
         }
+        
+        
+
+
+            .bg {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                z-index: -1;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                animation: bg 10s infinite;
+            }
+            #bg1 {
+                background-image: url('http://wa.bizihu.com/api-18.php');
+            }
+            #bg2 {
+                animation-delay: 5s;            /* bg2延迟5秒开始。同时bg2一开始无图片，使bg1淡入时背景为白色而不是另一张图片 */
+            }
+            @keyframes bg{
+                0%{transform: scale(1.5, 1.5);opacity: 0;}
+                20%{opacity: 1;}                /* 0~2s 载入 */
+                30%{transform: scale(1, 1);}            /* 0~3s图片缩放 */
+                50%{opacity: 1;}                /* 5~7s 淡出 */
+                70%{opacity: 0;}                /* 7~10s 图片隐藏。另一个背景在本背景淡出同时载入 */
+                100%{opacity: 0;}
+            }
+     
     </style>
     <script>
         // 音乐设置
@@ -51,7 +81,7 @@
     
     <div id="main" class="container">
         <div class="row my-card justify-content-center">
-            <div class="col-lg-4 photo-bg"></div>
+            <div class="col-lg-4 bg"></div>
             <div class="col-lg-8 card">
                 <!-- 大标题 -->
                 <h1>4NNN.CN</h1>
@@ -110,7 +140,23 @@
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script defer src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="./static/layer-v3.5.1/layer/layer.js"></script>
-
+<script type="text/javascript">
+        countImg = 1;
+        countTime = 0;
+        bg1Container = document.getElementById("bg1");
+        bg2Container = document.getElementById("bg2");
+        setInterval(function(){
+            // 一个轮回为10秒（2个图片，第1张0-5s，第2张5-10s），每个背景在淡出后（第7秒）更新图片
+            countTime += 1;
+            if(countTime % 10 == 7){
+                countImg += 1;
+                bg1Container.style = `background-image: url(http://wa.bizihu.com/api-18.php)`;
+            }else if((countTime + 5) % 10 == 7){    // 第2张图片默认无图片，比第一张延迟5s开始动画，+5保证了在第2秒开始加载图片
+                countImg += 1;
+                bg2Container.style = `background-image: url(http://wa.bizihu.com/api-18.php)`;
+            }
+        }, 1000);
+    </script>
     <script src="./static/main.js"></script>
 
 </html>
