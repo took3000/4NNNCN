@@ -1,24 +1,35 @@
+
+
 <?php
-// 存储数据的文件
-$filename = 'data-18.dat';        
- 
-// 指定页面编码
-header('Content-type: text/html; charset=utf-8');
- 
-if(!file_exists($filename)) {
-    die($filename . ' 数据文件不存在');
+//存有美图链接的文件名img.txt
+$filename = "data-18.txt";
+if(!file_exists($filename)){
+    die('文件不存在');
 }
  
-// 读取整个数据文件
-$data = file_get_contents($filename);
+//从文本获取链接
+$pics = [];
+$fs = fopen($filename, "r");
+while(!feof($fs)){
+    $line=trim(fgets($fs));
+    if($line!=''){
+        array_push($pics, $line);
+    }
+}
  
-// 按换行符分割成数组
-$data = explode(PHP_EOL, $data);
+//从数组随机获取链接
+$pic = $pics[array_rand($pics)];
  
-// 随机获取一行索引
-$result = $data[array_rand($data)];
+//返回指定格式
+$type=$_GET['type'];
+switch($type){
  
-// 去除多余的换行符（保险起见）
-$result = str_replace(array("\r","\n","\r\n"), '', $result);
+//JSON返回
+case 'json':
+    header('Content-type:text/json');
+    die(json_encode(['pic'=>$pic]));
  
-echo 'document.write("'.htmlspecialchars($result).'");';
+default:
+    die(header("Location: $pic"));
+}
+?>
